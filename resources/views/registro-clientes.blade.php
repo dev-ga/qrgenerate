@@ -1,0 +1,18 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Inversiones P&G 2015 C.A.') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            {{-- <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg"> --}}
+                @livewire('registro-clientes')
+                {{-- <x-jet-prueba /> --}}
+                {{-- <x-jet-form-section /> --}}
+                {{-- <p>dash</p> --}}
+            {{-- </div> --}}
+        </div>
+    </div>
+</x-app-layout>

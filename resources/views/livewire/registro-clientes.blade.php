@@ -69,58 +69,6 @@
                             id="grid-last-name" type="text" name="telefono2" placeholder="+58" wire:model="telefono2">
                     </div>
                 </div>
-                {{--  <div class="-mx-3 md:flex mb-1">
-                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs mb-2" for="grid-city">
-                            Correo Electronico (email)
-                        </label>
-                        <input
-                            class="bg-gray-100 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
-                            id="grid-city" type="text" name="email" placeholder="@" wire:model="email">
-                        @error('email') <span class="error">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs mb-2" for="grid-state">
-                            Servicio
-                        </label>
-                        <div class="relative">
-                            <select
-                                class="bg-gray-100 block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
-                                id="grid-state" name="servicio" wire:model="servicio">
-                                <option value="covisol">Covisol</option>
-                                <option value="ozono">Ozono</option>
-                                <option value="ozono+covisol">Ozono + Covisol</option>
-                            </select>
-                            @error('servicio') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                    <div class="md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs mb-2" for="grid-state">
-                            Area para Sanitizar
-                        </label>
-                        <div class="relative">
-                            <select
-                                class="bg-gray-100 block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
-                                id="grid-state" name="area" wire:model="area">
-                                <option value="residencial">Residencial</option>
-                                <option value="casa propia">Casa Propia</option>
-                                <option value="comercio">Comercios</option>
-                                <option value="hospital">Hospital</option>
-                                <option value="clinica">Clinica</option>
-                                <option value="centro comercial">Centro Comercial</option>
-                                <option value="mini centro">Mini Centro</option>
-                                <option value="local comercial">Local Comercial</option>
-                                <option value="hospital">Hospital</option>
-                                <option value="automovil particular">Automovil Particular</option>
-                                <option value="autobus">AutoBus</option>
-                                <option value="microbus">MicroBus</option>
-                                <option value="camiones encabas">Camiones Encabas</option>
-                                <option value="containers">Containers</option>
-                            </select>
-                            @error('area') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                </div>  --}}
                 <div class="md:flex mb-1 mt-6">
                     <button wire:click="store"
                         class="inline-block px-6 py-2 font-medium leading-7 text-center text-green-700 uppercase transition bg-transparent border-2 border-green-700 rounded-full shadow hover:shadow-lg hover:bg-green-100 focus:outline-none">

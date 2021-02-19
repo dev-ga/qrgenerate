@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
+use App\Http\Livewire\CardSanitizaciones;
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\QrpdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,18 +22,6 @@ use Illuminate\Support\Facades\Crypt;
 Route::get('/', function () {
     return view('welcome');
 });
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/registro', function () {
-//     return view('registro');
-// })->name('registro');
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/qr', function () {
-//     return view('qr');
-// })->name('qr');
 
 // prueba para rutas por grupos
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
@@ -50,6 +41,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('table/sanitizaciones', function () {
         return view('table-sanitizaciones');
     })->name('table.sanitizaciones');
+
+    Route::get('editar/clientes', function () {
+        return view('editar-cliente');
+    })->name('editar.cliente');
+
+    Route::get('qr/{id}/pdf', [QrpdfController::class, 'qrpdf'])->name('generate.qrpdf');
 
     
 });
@@ -73,3 +70,5 @@ Route::get('pruebaqr', function() {
     //
 });
 
+
+Route::get('/sanitizaciones/{data}', [CardController::class, 'index'])->name('sanitizaciones');

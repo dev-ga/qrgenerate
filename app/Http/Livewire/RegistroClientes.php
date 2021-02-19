@@ -57,11 +57,10 @@ class RegistroClientes extends Component
 
         ]);
 
-
-
         #...................
         #Fin Store()
     }
+
 
     public function render()
     {

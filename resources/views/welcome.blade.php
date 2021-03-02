@@ -29,17 +29,17 @@
                 <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Inversiones P&G 2015 C.A.</h1>
                 <p class="mb-8 leading-relaxed">Bienvenidos al QRGenerate, sistema que se encarga de generar codigos QR con toda la informacion de cada uno de los clientes registrados en nuestra plataforma. Dicha informacion viene estructurada por el nombre de la empresa o nombre del cliente natural, el tipo de servico, el area que sera sanitizada y las fechas de sanitizacion tanto la inicial como la proxima.</p>
                 
-                @if (Route::has('login'))
+                {{-- @if (Route::has('login')) --}}
                 <div class="flex justify-center">
-                    @auth
-                    @else
+                    {{-- @auth
+                    @else --}}
                         <a href="{{ route('login') }}" class="bg-green-500 text-white active:bg-green-600 font-bold text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease">Login</a>
-                        @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="bg-green-500 text-white active:bg-green-600 font-bold text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease">Registro</a>
-                        @endif
-                    @endauth
+                        {{-- @if (Route::has('register')) --}}
+                        {{-- <a href="{{ route('table.sanitizaciones') }}" class="bg-green-500 text-white active:bg-green-600 font-bold text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease">Sanitizaciones</a> --}}
+                        {{-- @endif
+                    @endauth --}}
                 </div>
-                @endif
+                {{-- @endif --}}
 
               </div>
             </div>

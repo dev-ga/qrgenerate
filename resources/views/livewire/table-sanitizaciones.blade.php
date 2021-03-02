@@ -30,7 +30,7 @@
                         Area</th>
                     <th
                         class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                        Fecha Inicio</th>
+                        Inicio</th>
                     <th
                         class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                         Vencimiento</th>
@@ -82,6 +82,11 @@
                            
                             <a href="{{ route('generate.qrpdf', $item->cliente_id) }}" class="bg-yellow-400 text-white active:bg-green-600 font-bold text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 inline-block" type="button" style="transition: all .15s ease">CodeQR</a>
                     </td>
+                    {{-- <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5 justify-items-start md:justify-items-center">
+                            
+                           
+                        <button wire:click="delete({{ $item->id }})" class="ml-1 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                </td> --}}
 
                     </tr>
                 @endforeach

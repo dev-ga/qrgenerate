@@ -24,7 +24,7 @@ Route::get('/', function () {
 });
 
 // prueba para rutas por grupos
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -49,7 +49,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('qr/{id}/pdf', [QrpdfController::class, 'qrpdf'])->name('generate.qrpdf');
 
     
-});
+ });
 
 
 

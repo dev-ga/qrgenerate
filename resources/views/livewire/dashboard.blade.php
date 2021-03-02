@@ -19,6 +19,9 @@
                     <th
                         class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                         Descripcion</th>
+                        <th
+                        class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+                        Cedula/Rif</th>
                     <th
                         class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                         Email</th>
@@ -46,6 +49,9 @@
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                             <div class="text-sm leading-5 text-blue-900">{{ $item->nombre_rs }}</div>
                         </td>
+                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                            <div class="text-sm leading-5 text-blue-900">{{ $item->cedula_rif }}</div>
+                        </td>
                         <td
                             class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                             {{ $item->email }}</td>
@@ -61,10 +67,9 @@
                         </td>
                         <td
                             class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                            {{ $item->created_at }}</td>
-                            {{--  <button wire:click="editar({{ $item->id }})"
-                            class="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">View
-                            Details</button>  --}}
+                            {{ $item->created_at }}
+                            {{-- <button wire:click="delete({{ $item->id }})" class="ml-1 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button> --}}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

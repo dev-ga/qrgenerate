@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\DB;
 class Dashboard extends Component
 {
 
-
-    public function editar($id)
+    public function delete($id)
     {
-        # code...
-        $prueba = $id;
-        return view('editar-clientes', ['prueba' => $prueba]);
-        // dd($id);
+        $this->company_id = $id;
+        Cliente::find($id)->delete();
+        session()->flash('message', 'Company deleted successfully.');
+        return redirect()->to('dashboard');
     }
+
 
     public function render()
     {

@@ -153,26 +153,26 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        {{-- <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-        </div>
+        </div> --}}
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('registro.clientes') }}" :active="request()->routeIs('registro.clientes')">
+            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('registro.clientes')">
                 {{ __('Clientes') }}
             </x-jet-responsive-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('registro.sanitizaciones') }}" :active="request()->routeIs('registro.sanitizaciones')">
+            <x-jet-responsive-nav-link href="{{ route('table.sanitizaciones') }}" :active="request()->routeIs('registro.sanitizaciones')">
                 {{ __('Sanitizaciones') }}
             </x-jet-responsive-nav-link>
         </div>
-        <div class="pt-2 pb-3 space-y-1">
+        {{-- <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('table.sanitizaciones') }}" :active="request()->routeIs('table.sanitizaciones')">
                 {{ __('Tabla Sanitizacion') }}
             </x-jet-responsive-nav-link>
-        </div>
+        </div> --}}
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

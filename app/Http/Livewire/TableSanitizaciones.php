@@ -12,6 +12,14 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TableSanitizaciones extends Component
 {
+    public function delete($id)
+    {
+        $this->company_id = $id;
+        Cliente::find($id)->delete();
+        session()->flash('message', 'Company deleted successfully.');
+        return redirect()->to('table/sanitizaciones');
+    }
+
     public function render()
     {
         $data = Sanitizacion::all()->sortByDesc('created_at');

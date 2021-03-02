@@ -71,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="-mx-3 md:flex mb-1">
+                <div class="-mx-3 md:flex mb-1 mt-5">
                     <div class="md:w-full px-3">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs mb-2" for="grid-password">
                             Fecha de Inicio

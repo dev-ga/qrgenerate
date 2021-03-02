@@ -8,6 +8,7 @@ use App\Models\Cliente;
 class RegistroClientes extends Component
 {
     public $nombre_rs;
+    public $prefijo;
     public $cedula_rif;
     public $direccion;
     public $email;
@@ -19,6 +20,7 @@ class RegistroClientes extends Component
         $this->validate([
 
             'nombre_rs' => 'required',
+            'prefijo' => 'required',
             'cedula_rif' => 'required',
             'direccion' => 'required',
             'email' => 'required|email',
@@ -30,7 +32,7 @@ class RegistroClientes extends Component
         Cliente::create([
 
             'nombre_rs' => $this->nombre_rs,
-            'cedula_rif' => $this->cedula_rif,
+            'cedula_rif' => $this->prefijo.''.$this->cedula_rif,
             'direccion' => $this->direccion,
             'email' => $this->email,
             'telefono1' => $this->telefono1,

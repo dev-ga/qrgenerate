@@ -5,17 +5,27 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Cliente;
 
-class RegistroClientes extends Component
+class Clientes extends Component
 {
+    public $clientes;
     public $nombre_rs;
     public $prefijo;
     public $cedula_rif;
     public $direccion;
     public $email;
     public $telefono1;
-    public $telefono2;
 
-    public function store()
+    public function render()
+    {
+        // $clientes = Cliente::all()->sortByDesc('created_at');
+        // return view('livewire.clientes', ['clientes' => $clientes]);
+        $this->clientes = Cliente::all()->sortByDesc('created_at');
+        return view('livewire.clientes');
+
+    } 
+
+
+    public function storee()
     {
         $this->validate([
 
@@ -35,8 +45,8 @@ class RegistroClientes extends Component
             'cedula_rif' => $this->prefijo.''.$this->cedula_rif,
             'direccion' => $this->direccion,
             'email' => $this->email,
-            'telefono1' => $this->telefono1,
-            'telefono2' => $this->telefono2,
+            'telefono1' => $this->telefono1
+
 
         ]);
 
@@ -45,7 +55,8 @@ class RegistroClientes extends Component
         session()->flash('message', 'Cliente successfully created.');
        
         // return redirect()->to('registro/clientes');
-        return redirect()->to('dashboard');
+        // return redirect()->to('dashboard');
+        return back();
 
 
         #Limpiar el formulario despues de cargar la informacion
@@ -54,8 +65,7 @@ class RegistroClientes extends Component
             'cedula_rif',
             'direccion',
             'email',
-            'telefono1',
-            'telefono2',
+            'telefono1'
 
         ]);
 
@@ -63,11 +73,5 @@ class RegistroClientes extends Component
         #Fin Store()
     }
 
-
-    public function render()
-    {
-        return view('livewire.registro-clientes');
-    }
-
-
+    
 }

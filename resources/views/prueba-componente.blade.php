@@ -7,10 +7,7 @@
 
     <div class="py-4">
         <div class="max-w-7xl mt-6 mx-auto sm:px-6 lg:px-8">
-            
-            {{-- @livewire('dashboard') --}}
-            @livewire('clientes')
-
+          @livewire('prueba')
         </div>
     </div>
 </x-app-layout>

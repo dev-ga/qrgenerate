@@ -75,6 +75,11 @@
           @endif
           @endforeach
           <div class="border-gray-200 dark:border-gray-600 border border-b-0 my-1"></div>
+          <div class="p-4 flex space-x-4 bg-blue-300 bg-stripes bg-stripes-white rounded-md">
+            <div class="flex-1 rounded-md text-white font-extrabold text-center bg-red-500 p-6">prueba 1</div>
+            <div class="flex-1 rounded-md text-white font-extrabold text-center bg-red-500 p-6">prueba 2</div>
+            
+          </div>
           <div class="text-gray-500 dark:text-gray-400 flex mt-6 items-center justify-center">
                 <div class="dark:bg-black p-10 items-center justify-center shadow block content-center">
                     <span class="text-2xl ml-3 block text-center text-green-800 font-bold">Inicio Sanitizacion</span>
@@ -88,6 +93,7 @@
                 </div>
           </div>
         </div>
+        
       </div>
     </body>
 </html>

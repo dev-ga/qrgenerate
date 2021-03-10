@@ -55,8 +55,6 @@
           @endforeach
           <div class="border-gray-200 dark:border-gray-600 border border-b-0 my-1"></div>
           <div class="text-gray-500 dark:text-gray-400 flex mt-6 items-center justify-center">
-            
-            
                 <div class="dark:bg-black p-10 items-center justify-center shadow block content-center">
                     <span class="text-2xl ml-3 block text-center text-green-800 font-bold">Inicio Sanitizacion</span>
                     <img class="mt-2 rounded-2xl mb-6" src="https://cdn5.vectorstock.com/i/thumb-large/71/04/q-letter-green-logo-with-check-mark-inside-vector-30257104.jpg"/>
@@ -69,9 +67,14 @@
                   <span class="text-2xl ml-3 block text-center text-yellow-500 font-bold">{{ $item->fechafin }}</span>
                 </div>
                 {{-- <img class="w-17 h-17" viewbox="0 0 48 48" src="{{ asset('image/logoPG_login.png') }}" /> --}}
-            
           </div>
         </div>
+
+
+
+
+
+        
       </div>
     </body>
 </html>

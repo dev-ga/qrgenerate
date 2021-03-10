@@ -34,6 +34,10 @@ Route::get('/', function () {
         return view('registro-clientes');
     })->name('registro.clientes');
 
+    Route::get('registro', function () {
+        return view('livewire.clientes');
+    })->name('livewire.clientes');
+
     Route::get('registro/sanitizaciones', function () {
         return view('registro-sanitizaciones');
     })->name('registro.sanitizaciones');
@@ -72,3 +76,10 @@ Route::get('pruebaqr', function() {
 
 
 Route::get('/sanitizaciones/{data}', [CardController::class, 'index'])->name('sanitizaciones');
+
+
+
+Route::get('vistaprueba', function () {
+    return view('prueba-componente');
+})->name('prueba.componente');
+

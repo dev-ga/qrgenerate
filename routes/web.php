@@ -18,16 +18,17 @@ use App\Http\Controllers\QrpdfController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
 
 // prueba para rutas por grupos
+
+Route::group(['middleware' => 'redireccion'],function(){
  Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('prueba-componente');
     })->name('dashboard');
 
     Route::get('registro/clientes', function () {
@@ -43,7 +44,7 @@ Route::get('/', function () {
     })->name('registro.sanitizaciones');
 
     Route::get('table/sanitizaciones', function () {
-        return view('table-sanitizaciones');
+        return view('registro-sanitizaciones');
     })->name('table.sanitizaciones');
 
     Route::get('editar/clientes', function () {
@@ -52,8 +53,10 @@ Route::get('/', function () {
 
     Route::get('qr/{id}/pdf', [QrpdfController::class, 'qrpdf'])->name('generate.qrpdf');
 
-    
  });
+
+});
+
 
 
 

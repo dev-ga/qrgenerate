@@ -12,6 +12,13 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TableSanitizaciones extends Component
 {
+    
+    public function render()
+    {
+        $data = Sanitizacion::all()->sortByDesc('created_at');
+        return view('livewire.table-sanitizaciones', ['data' => $data]);
+    }
+
     public function delete($id)
     {
         $this->company_id = $id;
@@ -20,9 +27,5 @@ class TableSanitizaciones extends Component
         return redirect()->to('table/sanitizaciones');
     }
 
-    public function render()
-    {
-        $data = Sanitizacion::all()->sortByDesc('created_at');
-        return view('livewire.table-sanitizaciones', ['data' => $data]);
-    }
+    
 }

@@ -12,6 +12,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class RegistroSanitizaciones extends Component
 {
+    use WithPagination;
 
     public $nombrecliente;
     public $servicio;
@@ -19,6 +20,71 @@ class RegistroSanitizaciones extends Component
     public $fechainicio;
     public $fechafin;
 
+     /**
+     * @var $buscar
+     * *Variable para la busqueda dinamica
+     */
+    public $buscar = '';
+
+    /**
+     * @var $n_paginas
+     * *Variable para la busqueda dinamica
+     */
+    public $n_paginas = '5';
+
+
+    /**
+     * @var $atr_formulario
+     * *Variable para ocultar el formulario de registro
+     */
+    public $atr_formulario = 'hidden';
+
+    /**
+     * @var $atr_boton
+     * *Variable para mostrar el boton para agregar registro
+     */
+    public $atr_boton = '';
+
+    /**
+     * @var $messages
+     **asignar el mensaje de validacion personalizado a los campos del formulario
+     */
+    public $messages = [
+
+        'nombrecliente.required'    => "Cliente requerido",
+        'servicio.required'   => "Servicio requerido",
+        'area.required'      => "Area requerida",
+        'fechainicio.required'    => "Fecha inicio requerida",
+        'fechafin.required'        => "Fecha vencimiento requerida"
+    ];
+
+    /** 
+    * @param atr_formulario
+    * @param atr_boton
+    **Funcion para mostrar el formulario y ocultar el boton para
+    **agregar un nuevo registro
+    */
+    public function verFormulario()
+    {
+        $this->atr_formulario = '';
+        $this->atr_boton = 'hidden';
+
+    }
+
+
+    public function render()
+    {
+        // $clientes = Cliente::all();
+        // return view('livewire.registro-sanitizaciones', ['clientes' => $clientes]);
+        return view('livewire.registro-sanitizaciones', ['clientes' => Sanitizacion::where('id', 'like', "%{$this->buscar}%")
+            ->orWhere('nombrecliente', 'like', "%{$this->buscar}%")
+            ->orWhere('area', 'like', "%{$this->buscar}%")
+            ->orWhere('servicio', 'like', "%{$this->buscar}%")
+            ->orderBy('id', 'desc')
+            ->paginate($this->n_paginas),
+            'clientesr' => Cliente::all()
+        ]); 
+    }
 
     public function store()
     {
@@ -80,17 +146,8 @@ class RegistroSanitizaciones extends Component
             'fechafin'
 
         ]);
-
-
-
         #...................
         #Fin Store()
-    }
-
-    public function render()
-    {
-        $clientes = Cliente::all();
-        return view('livewire.registro-sanitizaciones', ['clientes' => $clientes]);
     }
 
 }

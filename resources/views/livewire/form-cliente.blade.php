@@ -1,4 +1,4 @@
-  <div class="py-10 {{ $atr_form }}"> 
+<div class="py-10 {{ $atr_form }}">
     <div class="align-middle min-w-full overflow-hidden shadow rounded-lg md:border-l-4 border-l-4 border-r-4 border-green-700">
         <div class="sm:rounded-lg md:rounded-lg">
             <label class="block uppercase tracking-wide text-grey-darker text-xs mb-2 pt-6 pl-8">

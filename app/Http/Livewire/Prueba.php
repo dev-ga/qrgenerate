@@ -32,9 +32,20 @@ class Prueba extends Component
      * @var $n_paginas
      * *Variable para la busqueda dinamica
      */
-    public $n_paginas = '5';
+    public $n_paginas = '10';
 
-    public $atr_form = 'hidden';
+
+    /**
+     * @var $atr_formulario
+     * *Variable para ocultar el formulario de registro
+     */
+    public $atr_formulario = 'hidden';
+
+    /**
+     * @var $atr_boton
+     * *Variable para mostrar el boton para agregar registro
+     */
+    public $atr_boton = '';
 
     /**
      * @var $messages
@@ -50,20 +61,29 @@ class Prueba extends Component
         'telefono1.required'    => "Telefono Principal requerido"
     ];
 
+    /** 
+    * @param atr_formulario
+    * @param atr_boton
+    **Funcion para mostrar el formulario y ocultar el boton para
+    **agregar un nuevo registro
+    */
+    public function verFormulario()
+    {
+        $this->atr_formulario = '';
+        $this->atr_boton = 'hidden';
+
+    }
+
+
     public function render()
     {
         return view('livewire.prueba', ['clientes' => Cliente::where('nombre_rs', 'like', "%{$this->buscar}%")
             ->orWhere('cedula_rif', 'like', "%{$this->buscar}%")
             ->orWhere('email', 'like', "%{$this->buscar}%")
             ->orWhere('telefono1', 'like', "%{$this->buscar}%")
+            ->orderBy('id', 'desc')
             ->paginate($this->n_paginas)
         ]); 
-    }
-
-    public function view_form()
-    {
-        $this->atr_form = '';
-
     }
 
     /**
@@ -80,7 +100,6 @@ class Prueba extends Component
             'email' => 'required|email',
             'telefono1' => 'required'
 
-
         ]);
 
         Cliente::create([
@@ -91,7 +110,6 @@ class Prueba extends Component
             'email' => $this->email,
             'telefono1' => $this->telefono1
 
-
         ]);
 
 
@@ -100,18 +118,12 @@ class Prueba extends Component
          * *Libreria TOARDs
          */
         session()->flash('message', 'Cliente successfully created.');
+
+        // $this->emit('clienteCreate');
+
+        $this->reset();
        
-        return redirect()->to('vistaprueba');
-
-        #Limpiar el formulario despues de cargar la informacion
-        $this->reset([
-            'nombre_rs',
-            'cedula_rif',
-            'direccion',
-            'email',
-            'telefono1'
-
-        ]);
+        // return redirect()->to('/vistaprueba');
 
         #...................
         #Fin Store()

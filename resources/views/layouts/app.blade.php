@@ -57,6 +57,38 @@
 
     @stack('scripts')
 
+    {{-- Script que bloquea el boton de atras en el navegador --}}
+    <script>
+        window.onload = function () {
+            if (typeof history.pushState === "function") {
+                history.pushState("jibberish", null, null);
+                window.onpopstate = function () {
+                    history.pushState('newjibberish', null, null);
+                };
+            } else {
+                var ignoreHashChange = true;
+                window.onhashchange = function () {
+                    if (!ignoreHashChange) {
+                        ignoreHashChange = true;
+                        window.location.hash = Math.random();
+                    } else {
+                        ignoreHashChange = false;   
+                    }
+                };
+            }
+        }
+     </script>
+     <script>
+        // previous page should be reloaded when user navigate through browser navigation
+        // for mozilla
+        window.onunload = function(){};
+        // for chrome
+        if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+            location.reload();
+        }
+    </script>
+
+
 </body>
 
 </html>

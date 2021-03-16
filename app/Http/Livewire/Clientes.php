@@ -5,8 +5,10 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Cliente;
 
+
 class Clientes extends Component
 {
+
     public $clientes;
     public $nombre_rs;
     public $prefijo;

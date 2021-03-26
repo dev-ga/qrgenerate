@@ -20,11 +20,11 @@ class CreateClientesTable extends Migration
             $table->string('direccion');
             $table->string('email')->unique();
             $table->string('telefono1');
-            $table->string('telefono2');
+            $table->string('estatus')->default('1');
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

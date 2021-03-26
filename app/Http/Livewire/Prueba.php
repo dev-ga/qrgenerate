@@ -6,6 +6,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Cliente;
 use Facade\FlareClient\Http\Client;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Prueba extends Component
 {
@@ -21,6 +23,7 @@ class Prueba extends Component
     public $direccion;
     public $email;
     public $telefono1;
+    public $estatus;
 
     /**
      * @var $buscar
@@ -41,11 +44,28 @@ class Prueba extends Component
      */
     public $atr_formulario = 'hidden';
 
+
     /**
      * @var $atr_boton
      * *Variable para mostrar el boton para agregar registro
      */
     public $atr_boton = '';
+
+
+    /**
+     * @var $atr_editar
+     * *Variable para activar la accion de editar para cambiar las propiedades del formulario.
+     * *Por defecto el valor en 'inactivo'
+     */
+    public $atr_editar = 'inactivo';
+
+
+    /**
+     * @var $idUpdate
+     * *Variable que maneja el id del cliente cuya data se va a editar para luego ser actualizada.
+     */
+    public $idUpdate;
+
 
     /**
      * @var $messages
@@ -60,6 +80,7 @@ class Prueba extends Component
         'email.required'        => "Correo Electronico requerido",
         'telefono1.required'    => "Telefono Principal requerido"
     ];
+
 
     /** 
     * @param atr_formulario
@@ -81,10 +102,12 @@ class Prueba extends Component
             ->orWhere('cedula_rif', 'like', "%{$this->buscar}%")
             ->orWhere('email', 'like', "%{$this->buscar}%")
             ->orWhere('telefono1', 'like', "%{$this->buscar}%")
+            ->orWhere('estatus', '2')
             ->orderBy('id', 'desc')
             ->paginate($this->n_paginas)
         ]); 
     }
+
 
     /**
      **Funcion para guardar los datos de cliente en la base de datos
@@ -119,20 +142,126 @@ class Prueba extends Component
          */
         session()->flash('message', 'Cliente successfully created.');
 
-        // $this->emit('clienteCreate');
-
         $this->reset();
-       
-        // return redirect()->to('/vistaprueba');
 
         #...................
         #Fin Store()
     }
 
-    public function destroy($id)
+
+    /**
+    *@param id
+    **Funcion para EDITAR registro del cliente en la base de datos
+    */
+    public function edit($id)
     {
-        dd($id);
-        # code...
+        $this->idUpdate = $id;
+        $data = Cliente::findorfail($id);
+
+        /**
+         * Datos que se pintaran en el formulario de actualizacion
+         */
+        $this->nombre_rs = $data->nombre_rs;
+        $this->cedula_rif = $data->cedula_rif;
+        $this->direccion = $data->direccion;
+        $this->email = $data->email;
+        $this->telefono1 = $data->telefono1;
+
+        /**
+         * Funcion para mostrar el formulario y poder editar la data
+         */
+        $this->verFormulario();
+
+        /**
+         * Datos para activar el boton de actualizar
+         */
+        $this->atr_editar = 'activo';
+
+        /**
+         * Manejo del prefijo, ya que esteno esta en la base de datos
+         */
+        if ($value = Str::startsWith($this->cedula_rif, 'J-')) {
+
+            $this->prefijo = 'J-';
+            $this->cedula_rif = ltrim($this->cedula_rif, 'J-');
+            
+        }
+        if ($value = Str::startsWith($this->cedula_rif, 'V-')) {
+
+            $this->prefijo = 'V-';
+            $this->cedula_rif = ltrim($this->cedula_rif, 'V-');
+
+        }
+        if ($value = Str::startsWith($this->cedula_rif, 'G-')) {
+
+            $this->prefijo = 'G-';
+            $this->cedula_rif = ltrim($this->cedula_rif, 'G-');
+
+        }
+        if ($value = Str::startsWith($this->cedula_rif, 'E-')) {
+
+            $this->prefijo = 'E-';
+            $this->cedula_rif = ltrim($this->cedula_rif, 'E-');
+
+        }
+
+    }
+
+    public function update()
+    {
+        // $prueba =$this->idUpdate;
+        // dd($prueba);
+        $this->validate([
+
+            'nombre_rs' => 'required',
+            'prefijo' => 'required',
+            'cedula_rif' => 'required',
+            'direccion' => 'required',
+            'email' => 'required|email',
+            'telefono1' => 'required'
+
+        ]);
+
+        Cliente::where('id', $this->idUpdate)->update([
+
+            'nombre_rs' => $this->nombre_rs,
+            'cedula_rif' => $this->prefijo.''.$this->cedula_rif,
+            'direccion' => $this->direccion,
+            'email' => $this->email,
+            'telefono1' => $this->telefono1,
+
+            ]);
+
+        /**
+         * *Enviar mensaje a la vista si el registro fue satisfactorio
+         * *Libreria TOARDs
+         */
+        session()->flash('message', 'Cliente actualizado con Exito.');
+
+        $this->reset();
+        
+    }
+
+
+    /**
+    *@param id
+    **Funcion para ELIMIAR registro del cliente en la base de datos
+    */
+    public function delete($id)
+    {
+        Cliente::find($id)->update(['estatus' => 2]);
+    }
+
+
+    /**
+    *@param id
+    **Funcion para ACTIVAR registro del cliente en la base de datos
+    */
+    public function activarCliente($id)
+    {
+        Cliente::find($id)->update(['estatus' => 1]);
+        // session()->flash('message', 'Cliente Activado con exito.');
+        // return redirect()->to('/dashboard');
     }
 
 }

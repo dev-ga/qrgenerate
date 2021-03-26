@@ -12,6 +12,19 @@
             "database": "pg2015db",
             "username": "root",
             "password": "123456"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "pg2015db",
+            "database": "pg2015db",
+            "username": "root",
+            "password": "123456"
         }
     ]
 }

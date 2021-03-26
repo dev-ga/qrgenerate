@@ -17,7 +17,7 @@ class Sanitizacion extends Model
         'area',
         'fechainicio',
         'fechafin',
-        'qrimg'
+        'estatus'
     ];
 
     public function cliente()

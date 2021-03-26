@@ -58,31 +58,13 @@ Route::group(['middleware' => 'redireccion'],function(){
 });
 
 
-
-
-
-Route::get('pruebaqr', function() {
-    // return QrCode::generate('Make me into a QrCode!');
-    $qr = QrCode::generate('Make me into a QrCode!');
-    dd($qr);
-
-    /*Para extraer la cadena <svg></svg> que contiene el codigo qr
-    este dato es el que se almacenara en la base de datos*/
-    /************************************/
-    $cadena = Str::between($qr, '?>', '\n');
-    $svg = Str::of($cadena)->trim();
-    /***********************************/
-    
-    return $qr;
-    //
-});
-
-
+/**
+ ** Ruta para cosultar el codigo el qr.
+ ** Esta ruta es publica ya que sera la configurada al generar el codigo qr.
+ */
 Route::get('/sanitizaciones/{data}', [CardController::class, 'index'])->name('sanitizaciones');
 
 
 
-Route::get('vistaprueba', function () {
-    return view('prueba-componente');
-})->name('prueba.componente');
+
 

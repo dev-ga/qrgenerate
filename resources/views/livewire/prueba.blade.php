@@ -97,12 +97,21 @@
                                 class="error text-xs text-red-500 italic">{{ $message }}</span> @enderror
                         </div>
                     </div>
+                    @if ($atr_editar == 'activo')
+                    <div class="md:flex mt-4">
+                        <button wire:click="update"
+                            class="inline-block px-6 py-2 font-medium leading-7 text-center text-green-700 uppercase transition bg-transparent border-2 border-green-700 rounded-full shadow hover:shadow-lg hover:bg-green-100 focus:outline-none">
+                            Actualizar
+                        </button>
+                    </div>
+                    @else
                     <div class="md:flex mt-4">
                         <button wire:click="store"
                             class="inline-block px-6 py-2 font-medium leading-7 text-center text-green-700 uppercase transition bg-transparent border-2 border-green-700 rounded-full shadow hover:shadow-lg hover:bg-green-100 focus:outline-none">
                             Registrar
                         </button>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -171,7 +180,11 @@
                                 class="bg-blue-200 text-blue-600 py-1 px-3 rounded-full text-xs">{{ $item->telefono1 }}</span>
                         </td>
                         <td class="py-3 px-6 text-center">
+                            @if ($item->estatus == '1')
                             <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Activo</span>
+                            @else
+                            <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Inactivo</span>
+                            @endif
                         </td>
                         <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center">
@@ -184,6 +197,7 @@
                                         </svg>
                                     </button>
                                 </div>
+                                @if ($item->estatus == '1')
                                 <div class="w-4 mr-2 transform text-red-300 hover:text-red-500 hover:scale-110">
                                     <button wire:click="delete({{ $item->id }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -193,6 +207,17 @@
                                         </svg>
                                     </button>
                                 </div>
+                                @else
+                                <div class="w-4 mr-2 transform text-green-300 hover:text-green-500 hover:scale-110">
+                                    <button wire:click="activarCliente({{ $item->id }})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                @endif
+
                             </div>
                         </td>
                     </tr>

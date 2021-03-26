@@ -16,7 +16,8 @@ class Cliente extends Model
         'direccion',
         'email',
         'telefono1',
-        'telefono2'
+        'estatus'
+
     ];
 
     public function sanitizaciones()

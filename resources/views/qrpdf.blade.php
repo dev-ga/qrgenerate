@@ -49,16 +49,19 @@
     
     </style>
     <div class="logo">
-        <img src="{{ asset('image/logoPG.png') }}">
+        <img src="../public/image/hero_sanity.jpg">
+        
     </div>
     <div class="texto"  width="80%" align="center">
     
         Nombre: {{ $Nombre }}
-        Cedula o Rif: {{ $Documento }}
+        Cedula o Rif: {{ $qr }}
         
     </div>
     <div class="punteado" width="80%" align="center">
         <img src="data:image/svg+xml;base64,{{ base64_encode($qr) }}">
+        <img src="data:image/png;base64,{{ base64_encode($base64) }}">
+        
     </div>
 
 

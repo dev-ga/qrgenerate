@@ -21,7 +21,8 @@ class CreateSanitizacionsTable extends Migration
             $table->string('area');
             $table->date('fechainicio');
             $table->date('fechafin');
-            $table->longText('qrimg');
+            //$table->longText('qrimg');
+            $table->string('estatus')->default('1');
             $table->foreign('cliente_id')->references('id')->on('clientes')->ondelete('cascade');
             $table->timestamps();
         });

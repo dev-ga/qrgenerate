@@ -94,12 +94,21 @@
                             @error('fechafin') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </div>
+                    @if ($atr_editar == 'activo')
+                    <div class="md:flex mb-1 mt-6">
+                        <button wire:click="update"
+                            class="inline-block px-6 py-2 font-medium leading-7 text-center text-green-700 uppercase transition bg-transparent border-2 border-green-700 rounded-full shadow hover:shadow-lg hover:bg-green-100 focus:outline-none">
+                            Actualizar
+                        </button>
+                    </div>
+                    @else
                     <div class="md:flex mb-1 mt-6">
                         <button wire:click="store"
                             class="inline-block px-6 py-2 font-medium leading-7 text-center text-green-700 uppercase transition bg-transparent border-2 border-green-700 rounded-full shadow hover:shadow-lg hover:bg-green-100 focus:outline-none">
                             Registrar
                         </button>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -182,21 +191,25 @@
                                     </button>
                                 </div>
                                 <div class="w-4 mr-2 transform text-green-300 hover:text-green-500 hover:scale-110">
-                                    <button wire:click="delete({{ $item->id }})">
+                                    <a href="{{ route('sanitizaciones', $item->cliente_id) }}" type="button">
+                                    {{-- <button wire:click="delete({{ $item->id }})"> --}}
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
                                         </svg>
-                                    </button>
+                                    {{-- </button> --}}
+                                    </a>
                                 </div>
                                 <div class="w-4 mr-2 transform text-blue-300 hover:text-blue-500 hover:scale-125">
-                                    <button wire:click="delete({{ $item->id }})">
+                                    <a href="{{ route('generate.qrpdf', $item->cliente_id) }}" type="button">
+                                    {{-- <button wire:click="delete({{ $item->id }})"> --}}
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                         </svg>
-                                    </button>
+                                    {{-- </button> --}}
+                                    </a>
                                 </div>
                                 <div class="w-4 mr-2 transform text-red-300 hover:text-red-500 hover:scale-110">
                                     <button wire:click="delete({{ $item->id }})">

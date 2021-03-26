@@ -5,7 +5,7 @@
     </script>
 @endif
 
-         {{-- Linea 1 del formulario --}}
+        {{-- Linea 1 del formulario --}}
 
           <div class="p-4 flex md:flex space-x-4 rounded-md ">
             <div class="flex-1">
@@ -38,6 +38,8 @@
                 @error('cedula_rif') <span class="error">{{ $message }}</span> @enderror
             </div>
           </div>
+
+        {{-- Linea 1 del formulario --}}
 
           <div class="p-4 flex  space-x-4 rounded-md">
             <div class="flex-1">

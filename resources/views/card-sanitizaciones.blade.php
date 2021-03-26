@@ -44,8 +44,6 @@
                       </div>
                     </td>
                 </tr>
-      
-                  <!-- More rows... -->
                 </tbody>
               </table>
             </div>
@@ -53,17 +51,18 @@
         </div>
       </div>
       <div class="dark:bg-black p-10 flex items-center justify-center">
-        <div class="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-800 p-4 rounded-xl border max-w-xl">
+        <div class=" shadow-lg bg-white dark:bg-gray-800  p-4 rounded-xl  max-w-xl">
           <div class="flex justify-between">
             <div class="flex items-center">
                 @foreach ($datas as $item)
                 {{QrCode::size(60)->generate("http://127.0.0.1:8000/sanitizaciones/".$item->id)}}
               <div class="ml-1.5 text-sm leading-tight">
-                <span class="text-2xl leading-normal mt-0 ml-4 text-green-800 font-bold block ">{{ $item->nombrecliente }}</span>
+                <span class="text-2xl leading-normal mt-0 ml-4 font-bold block ">{{ $item->nombrecliente }}</span>
               </div>
             </div>
           </div>
-          <p class=" text-green-800 font-bold dark:text-white block text-xl leading-snug mt-6">Tipo de Sanitizacion: {{ $item->servicio }}</p>
+          <p class="dark:text-white block text-xl sm:text-xs leading-snug mt-6">Sanitizador: {{ $item->servicio }}</p>
+          <p class="dark:text-white block text-xl sm:text-xs leading-snug mt-1 mb-4">Area: {{ $item->area }}</p>
           @if ($item->servicio == 'covisol')
           <img class="mt-2 rounded-2xl border border-gray-100 dark:border-gray-700 mb-6" src="{{ asset('image/covisolRender.png') }}"/>
           @endif
@@ -75,25 +74,32 @@
           @endif
           @endforeach
           <div class="border-gray-200 dark:border-gray-600 border border-b-0 my-1"></div>
-          <div class="p-4 flex space-x-4 bg-blue-300 bg-stripes bg-stripes-white rounded-md">
-            <div class="flex-1 rounded-md text-white font-extrabold text-center bg-red-500 p-6">prueba 1</div>
-            <div class="flex-1 rounded-md text-white font-extrabold text-center bg-red-500 p-6">prueba 2</div>
-            
-          </div>
-          <div class="text-gray-500 dark:text-gray-400 flex mt-6 items-center justify-center">
-                <div class="dark:bg-black p-10 items-center justify-center shadow block content-center">
-                    <span class="text-2xl ml-3 block text-center text-green-800 font-bold">Inicio Sanitizacion</span>
-                    <img class="mt-2 rounded-2xl mb-6" src="https://cdn5.vectorstock.com/i/thumb-large/71/04/q-letter-green-logo-with-check-mark-inside-vector-30257104.jpg"/>
-                    <span class="text-2xl ml-3 block text-center text-green-800 font-bold">{{ $item->fechainicio }}</span>
-                </div>
-                <div class="dark:bg-black p-10 items-center justify-center shadow block">
-                  <span class="text-2xl ml-3 block text-center text-yellow-500 font-bold">Vencimiento Sanitizacion</span>
-                  <img class="mt-2 rounded-2xl mb-6" src="https://icons.iconarchive.com/icons/3dlb/3d-vol2/256/warning-icon.png"/>
-                  <span class="text-2xl ml-3 block text-center text-yellow-500 font-bold">{{ $item->fechafin }}</span>
-                </div>
+          <div class="p-4 flex space-x-4 bg-white-300 bg-stripes bg-stripes-white rounded-md">
+            <div class="shadow-lg flex-1 rounded-md text-white font-extrabold text-center bg-gray-50 p-6">
+              <div class="w-16 sm:w-8 md:w-16 transform scale-150 text-green-500 mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <figcaption class="font-medium pt-6">
+                <div class="text-3xl font-bold text-green-500">Incio</div>
+                <div class="text-2xl text-green-500 border-2 border-green-700 rounded-md p-2 mt-4">{{ $item->fechainicio }}</div>
+              </figcaption>
+            </div>
+            <div class="shadow-lg flex-1 rounded-md text-white font-extrabold text-center bg-gray-50 p-6">
+              <div class="w-16 sm:w-8 md:w-16 transform text-red-500 scale-150 mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <figcaption class="font-medium pt-6">
+                <div class="text-3xl font-bold text-red-500">Vencimiento</div>
+                <div class="w-auto"></div>
+                <div class="text-2xl text-red-500 border-2 border-red-700 rounded-md p-2 mt-4 font-extrabold">{{ $item->fechafin }}</div>
+              </figcaption>
+            </div>
           </div>
         </div>
-        
       </div>
     </body>
 </html>

@@ -19,6 +19,7 @@ class RegistroSanitizaciones extends Component
     public $area;
     public $fechainicio;
     public $fechafin;
+    public $estatus;
 
      /**
      * @var $buscar
@@ -39,11 +40,28 @@ class RegistroSanitizaciones extends Component
      */
     public $atr_formulario = 'hidden';
 
+
     /**
      * @var $atr_boton
      * *Variable para mostrar el boton para agregar registro
      */
     public $atr_boton = '';
+
+
+    /**
+     * @var $atr_editar
+     * *Variable para activar la accion de editar para cambiar las propiedades del formulario.
+     * *Por defecto el valor en 'inactivo'
+     */
+    public $atr_editar = 'inactivo';
+
+
+    /**
+     * @var $idUpdate
+     * *Variable que maneja el id del cliente cuya data se va a editar para luego ser actualizada.
+     */
+    public $idUpdate;
+
 
     /**
      * @var $messages
@@ -52,10 +70,10 @@ class RegistroSanitizaciones extends Component
     public $messages = [
 
         'nombrecliente.required'    => "Cliente requerido",
-        'servicio.required'   => "Servicio requerido",
-        'area.required'      => "Area requerida",
-        'fechainicio.required'    => "Fecha inicio requerida",
-        'fechafin.required'        => "Fecha vencimiento requerida"
+        'servicio.required'         => "Servicio requerido",
+        'area.required'             => "Area requerida",
+        'fechainicio.required'      => "Fecha inicio requerida",
+        'fechafin.required'         => "Fecha vencimiento requerida"
     ];
 
     /** 
@@ -66,23 +84,22 @@ class RegistroSanitizaciones extends Component
     */
     public function verFormulario()
     {
-        $this->atr_formulario = '';
-        $this->atr_boton = 'hidden';
+        $this->atr_formulario   = '';
+        $this->atr_boton        = 'hidden';
 
     }
 
 
     public function render()
     {
-        // $clientes = Cliente::all();
-        // return view('livewire.registro-sanitizaciones', ['clientes' => $clientes]);
         return view('livewire.registro-sanitizaciones', ['clientes' => Sanitizacion::where('id', 'like', "%{$this->buscar}%")
             ->orWhere('nombrecliente', 'like', "%{$this->buscar}%")
             ->orWhere('area', 'like', "%{$this->buscar}%")
             ->orWhere('servicio', 'like', "%{$this->buscar}%")
             ->orderBy('id', 'desc')
             ->paginate($this->n_paginas),
-            'clientesr' => Cliente::all()
+   
+            'clientesr' => Cliente::all()->where('estatus', '1')
         ]); 
     }
 
@@ -90,11 +107,11 @@ class RegistroSanitizaciones extends Component
     {
         $this->validate([
 
-            'nombrecliente' => 'required',
-            'servicio' => 'required',
-            'area' => 'required',
-            'fechainicio' => 'required',
-            'fechafin' => 'required'
+            'nombrecliente'     => 'required',
+            'servicio'          => 'required',
+            'area'              => 'required',
+            'fechainicio'       => 'required',
+            'fechafin'          => 'required'
 
         ]);
 
@@ -119,13 +136,12 @@ class RegistroSanitizaciones extends Component
         // dd($qrsvg);
         Sanitizacion::create([
 
-            'cliente_id' => $cliente_id,
+            'cliente_id'    => $cliente_id,
             'nombrecliente' => $this->nombrecliente,
-            'servicio' => $this->servicio,
-            'area' => $this->area,
-            'fechainicio' => $this->fechainicio,
-            'fechafin' => $this->fechafin,
-            'qrimg' => $qrsvg
+            'servicio'      => $this->servicio,
+            'area'          => $this->area,
+            'fechainicio'   => $this->fechainicio,
+            'fechafin'      => $this->fechafin
 
         ]);
 
@@ -144,10 +160,77 @@ class RegistroSanitizaciones extends Component
             'area',
             'fechainicio',
             'fechafin'
-
         ]);
         #...................
         #Fin Store()
+    }
+
+
+    /**
+    *@param id
+    **Funcion para EDITAR registro del cliente en la base de datos
+    */
+    public function edit($id)
+    {
+        $this->idUpdate = $id;
+        $data = Sanitizacion::findorfail($id);
+
+        /**
+         * Datos que se pintaran en el formulario de actualizacion
+         */
+        $this->nombrecliente    = $data->nombrecliente;
+        $this->servicio         = $data->servicio;
+        $this->area             = $data->area;
+        $this->fechainicio      = $data->fechainicio;
+        $this->fechafin         = $data->fechafin;
+
+        /**
+         * Funcion para mostrar el formulario y poder editar la data
+         */
+        $this->verFormulario();
+
+        /**
+         * Datos para activar el boton de actualizar
+         */
+        $this->atr_editar = 'activo';
+    }
+
+    public function update()
+    {
+        $this->validate([
+
+            'nombrecliente'     => 'required',
+            'servicio'          => 'required',
+            'area'              => 'required',
+            'fechainicio'       => 'required',
+            'fechafin'          => 'required'
+
+        ]);
+
+        Sanitizacion::where('id', $this->idUpdate)->update([
+
+            'nombrecliente'     => $this->nombrecliente,
+            'servicio'          => $this->servicio,
+            'area'              => $this->area,
+            'fechainicio'       => $this->fechainicio,
+            'fechafin'          => $this->fechafin
+
+            ]);
+
+        /**
+         * *Enviar mensaje a la vista si el registro fue satisfactorio
+         * *Libreria TOARDs
+         */
+        session()->flash('message', 'Sanitizacion actualizada con Exito.');
+
+        $this->reset();
+        
+    }
+
+    public function delete($id)
+    {
+        Sanitizacion::find($id)->delete();
+        session()->flash('message', 'La Sanitizacion fue eliminada.');
     }
 
 }

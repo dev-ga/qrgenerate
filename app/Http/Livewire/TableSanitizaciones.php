@@ -15,16 +15,8 @@ class TableSanitizaciones extends Component
     
     public function render()
     {
-        $data = Sanitizacion::all()->sortByDesc('created_at');
-        return view('livewire.table-sanitizaciones', ['data' => $data]);
-    }
-
-    public function delete($id)
-    {
-        $this->company_id = $id;
-        Cliente::find($id)->delete();
-        session()->flash('message', 'Company deleted successfully.');
-        return redirect()->to('table/sanitizaciones');
+        // $data = Sanitizacion::all()->sortByDesc('created_at');
+        // return view('livewire.table-sanitizaciones', ['data' => $data]);
     }
 
     

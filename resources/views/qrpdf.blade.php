@@ -7,69 +7,61 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-
-    @livewireStyles
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-        crossorigin="anonymous"></script>
 </head>
 
-<body class="font-sans antialiased">
+<body >
 
     <style type="text/css">
         .punteado {
             border-style: dashed dotted;
             margin: 0 auto;
             text-align: center;
-            width: 150px;
-            padding: 30px;
+            width: 200px;
+            padding: 20px;
         }
         .texto {
             margin: 0 auto;
             text-align: center;
-            width: 150px;
-            padding: 30px;
-            margin-button: 30px;
+            width: 200px;
+            padding: 10px;
+            margin-top: 15px;
             display: inline-block;
+        }
+        .documento {
+            margin: 0 auto;
+            text-align: center;
+            width: 200px;
+            padding: 10px;
+            margin-button: 15px;
+            display: inline-block;
+        }
+        .imagen{
+            margin-bottom: 15px;
+            max-width: 30%;
         }
     
     </style>
-    <div class="logo">
-        <img src="../public/image/hero_sanity.jpg">
-        
-    </div>
-    <div class="texto"  width="80%" align="center">
-    
-        Nombre: {{ $Nombre }}
-        Cedula o Rif: {{ $qr }}
-        
+    <div class="logo" align="center">
+        <img class="imagen" src="../public/image/logoPG.png">
     </div>
     <div class="punteado" width="80%" align="center">
         <img src="data:image/svg+xml;base64,{{ base64_encode($qr) }}">
-        <img src="data:image/png;base64,{{ base64_encode($base64) }}">
-        
     </div>
-
-
-    @stack('modals')
-
-    @livewireScripts
-
-    @stack('scripts')
+    <div class="texto"  width="100%" align="center">
+        {{ $nombre }} , {{ $rif }}
+    </div>
+    <div width="100%" align="center">
+        Web: http://pg2015.com.ve/
+    </div>
 
 </body>
 

@@ -91,7 +91,7 @@
                             </label>
                             <input
                                 class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"
-                                id="grid-last-name" type="text" name="telefono1" placeholder="+58"
+                                id="grid-last-name" type="text" name="telefono1" placeholder="Ej: 0412-1234567"
                                 wire:model="telefono1">
                             @error('telefono1') <span
                                 class="error text-xs text-red-500 italic">{{ $message }}</span> @enderror
@@ -133,7 +133,7 @@
                 </svg>
             </button>
         </div>
-        {{-- fin del boton --}}
+        {{-- fin del boton agregar clientes --}}
 
         {{-- Tabla de clientes --}}
         <table class="min-w-max w-full table-auto">
@@ -160,7 +160,7 @@
                             <div class="flex items-center">
                                 <div class="mr-2">
                                     <img class="w-6 h-6 rounded-full"
-                                        src="https://livingatlas.arcgis.com/topoexplorer/images/profile-pictures.png" />
+                                        src="{{ asset('image/userRegister.png') }}" />
                                 </div>
                                 <span>{{ $item->nombre_rs }}</span>
                             </div>

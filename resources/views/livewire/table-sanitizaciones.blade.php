@@ -148,7 +148,7 @@
                             <div class="flex items-center">
                                 <div class="mr-2">
                                     <img class="w-6 h-6 rounded-full"
-                                        src="https://livingatlas.arcgis.com/topoexplorer/images/profile-pictures.png" />
+                                        src="https://listimg.pinclipart.com/picdir/s/13-131563_pest-control-pest-control-icon-png-clipart.png" />
                                 </div>
                                 <span>{{ $item->id }}</span>
                             </div>

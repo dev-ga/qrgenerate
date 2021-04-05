@@ -6,6 +6,13 @@
         </script>
     @endif
 
+    @if (session()->has('error'))
+        <script>
+            toastr.error("{{ session('error') }}")
+        </script>
+    @endif
+    
+
     {{-- Formulario de registro de sanitizaciones --}}
     <div class="py-10 {{ $atr_formulario }}">
         <div class="align-middle min-w-full overflow-hidden shadow rounded-lg md:border-l-4 border-l-4 border-r-4 border-green-700">
@@ -150,14 +157,14 @@
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                             <div class="flex items-center">
-                                <span class="font-medium">{{QrCode::size(60)->generate("http://127.0.0.1:8000/sanitizaciones/".$item->cliente_id)}}</span>
+                                <span class="font-medium">{{QrCode::size(60)->generate("http://pbqr.pg2015.com.ve/public/sanitizaciones/".$item->cliente_id)}}</span>
                             </div>
                         </td>
                         <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
                                 <div class="mr-2">
-                                    <img class="w-6 h-6 rounded-full"
-                                        src="https://livingatlas.arcgis.com/topoexplorer/images/profile-pictures.png" />
+                                    <img class="w-9 h-9 rounded-full"
+                                        src="https://media.istockphoto.com/vectors/spraying-insecticide-vector-simple-modern-icon-design-illustration-vector-id1218354278?k=6&m=1218354278&s=612x612&w=0&h=DS2Wgwv8aPljGddNyTCzbxKDataz9ZlZWSlHA0zsKaI=" />
                                 </div>
                                 <span>{{ $item->id }}</span>
                             </div>

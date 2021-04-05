@@ -125,44 +125,54 @@ class RegistroSanitizaciones extends Component
             $cliente_id = $item->id;
         }
 
-        // dd($cliente_id);
-        // Generacion de codigo qr
-        $qr = QrCode::generate('Make me into a QrCode!');
 
-        // Extraigo las cadena de caracteres para guardar en base de datos
-        $cadena = Str::between($qr, '?>', '\n');
-        $qrsvg = Str::of($cadena)->trim();
+        /**
+         * Query para validar que el cliente no posee sanitizacion programada
+         * @param cliente_id
+         */
+        $query2 = "select cliente_id from sanitizacions where cliente_id = '$cliente_id'";
+        $resul2 = DB::connection('mysql')->select($query2);
+
+        if (Empty($resul2)) {
+
+            Sanitizacion::create([
+
+                'cliente_id'    => $cliente_id,
+                'nombrecliente' => $this->nombrecliente,
+                'servicio'      => $this->servicio,
+                'area'          => $this->area,
+                'fechainicio'   => $this->fechainicio,
+                'fechafin'      => $this->fechafin
+    
+            ]);
+    
+    
+            // Enviar mensaje a la vista si el registro fue creado.
+            session()->flash('message', 'Sanitizacion successfully Progranmed.');
+           
+            return redirect()->to('table/sanitizaciones');
+    
+            // Limpiar el formulario despues de cargar la informacion
+            $this->reset([
+                'nombrecliente',
+                'servicio',
+                'area',
+                'fechainicio',
+                'fechafin'
+            ]);
+
+            #Fin Store()
+
+
+           
+        }else {
+
+            session()->flash('error', 'El cliente ya posee una Sanitizacion programada.');
+            
+        }
 
         // dd($qrsvg);
-        Sanitizacion::create([
-
-            'cliente_id'    => $cliente_id,
-            'nombrecliente' => $this->nombrecliente,
-            'servicio'      => $this->servicio,
-            'area'          => $this->area,
-            'fechainicio'   => $this->fechainicio,
-            'fechafin'      => $this->fechafin
-
-        ]);
-
-
-        // Enviar mensaje a la vista si el registro fue creado.
-        session()->flash('message', 'Sanitizacion successfully Progranmed.');
        
-        return redirect()->to('table/sanitizaciones');
-        // return redirect()->to('dashboard');
-
-
-        // Limpiar el formulario despues de cargar la informacion
-        $this->reset([
-            'nombrecliente',
-            'servicio',
-            'area',
-            'fechainicio',
-            'fechafin'
-        ]);
-        #...................
-        #Fin Store()
     }
 
 

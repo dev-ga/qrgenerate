@@ -64,6 +64,10 @@ Route::group(['middleware' => 'redireccion'],function(){
  */
 Route::get('/sanitizaciones/{data}', [CardController::class, 'index'])->name('sanitizaciones');
 
+Route::get('qr', function () {
+    return view('qrpdf');
+});
+
 
 
 

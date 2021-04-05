@@ -61,8 +61,8 @@
               </div>
             </div>
           </div>
-          <p class="dark:text-white block text-xl sm:text-xs leading-snug mt-6">Sanitizador: {{ $item->servicio }}</p>
-          <p class="dark:text-white block text-xl sm:text-xs leading-snug mt-1 mb-4">Area: {{ $item->area }}</p>
+          <p class="dark:text-white block text-xl md:text-xl leading-snug mt-6">Sanitizador: {{ $item->servicio }}</p>
+          <p class="dark:text-white block text-xl md:text-xl leading-snug mt-1 mb-4">Area: {{ $item->area }}</p>
           @if ($item->servicio == 'covisol')
           <img class="mt-2 rounded-2xl border border-gray-100 dark:border-gray-700 mb-6" src="{{ asset('image/covisolRender.png') }}"/>
           @endif
